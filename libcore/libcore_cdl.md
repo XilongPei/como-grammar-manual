@@ -24,10 +24,17 @@
 ### IArrayHolder.cdl
 ### IAutoCloseable.cdl
 ### IBoolean.cdl
-### IByte.cdl
-namespace como.core
 
-实现接口interface IByte
+
+
+### IByte.cdl
+como.core
+
+##### 接口(interface )
+
+IByte
+
+##### 常量(Consts)
 
 - const Byte MIN_VALUE = -128;
 
@@ -39,39 +46,70 @@ A constant holding the maximum value a {@code byte} can have, 2<sup>7</sup>-1.
 
 - const Integer SIZE = 8;
 
+##### 方法总汇(Method Summary)
+
 
 ```idl
-ByteValue(
-    [out] Byte& value);
-
-CompareTo(
-    [in] IInterface* other,
-    [out] Integer& result);
-
-DoubleValue(
-    [out] Double& value);
-
-FloatValue(
-    [out] Float& value);
-
-GetValue(
-    [out] Byte& value);
-
-IntegerValue(
-    [out] Integer& value);
-
-LongValue(
-    [out] Long& value);
-
-ShortValue(
-    [out] Short& value);
+ByteValue([out] Byte& value);
+CompareTo([in] IInterface* other, [out] Integer& result);
+DoubleValue([out] Double& value);
+FloatValue([out] Float& value);
+GetValue([out] Byte& value);
+IntegerValue([out] Integer& value);
+LongValue([out] Long& value);
+ShortValue([out] Short& value);
 ```
+
+##### 方法详解(Method Detail)
+
+- ByteValue([out] Byte& value);
+
+  **参数(Parameters):**
+
+  [out] Byte& value
+
 
 
 ### IChar.cdl
 
+
+
+
+
 ### ICharSequence.cdl
-### ICloneable.cdl
+como.core
+
+##### 接口(interface )
+
+ICharSequence
+
+##### 常量(Consts)
+
+
+##### 方法总汇(Method Summary)
+
+
+```idl
+GetCharAt([in] Integer index, [out] Char& c);
+GetLength([out] Integer& number);
+SubSequence([in] Integer start, [in] Integer end, [out] ICharSequence&& subcsq);
+ToString([out] String& str);
+```
+
+##### 方法详解(Method Detail)
+
+- GetCharAt([in] Integer index, [out] Char& c);
+
+     **参数(Parameters):**
+
+     1. [in] Integer index
+
+     2. [out] Char& c
+
+
+
+   ### ICloneable.cdl
+
 ### IComparable.cdl
 ### IDouble.cdl
 ### IFloat.cdl
