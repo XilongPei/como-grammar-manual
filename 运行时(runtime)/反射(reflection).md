@@ -38,7 +38,13 @@ interface como::IMetaComponent
 ## 接口介绍
 
 ### IMetaComponent
+
+构件元数据操作
+
 ##### 常量(Consts)
+
+（无）
+
 ##### 方法总汇(Method Summary)
 ```idl
 GetName([out] String& name);
@@ -71,18 +77,24 @@ Unload();
   获取构件名称。
 
   **参数(Parameters):**
-  
+
   1. [out] String& name
-  
+
 - GetComponentID([out] ComponentID& cid);
   **参数(Parameters):**
-  
+
     1. [out] ComponentID& cid
 
 
 
 ### IMetaCoclass
+
+类元数据操作。
+
 ##### 常量(Consts)
+
+(无)
+
 ##### 方法总汇(Method Summary)
 ```idl
 GetComponent([out] IMetaComponent&& comp);
@@ -111,9 +123,14 @@ CreateObject([in] InterfaceID iid, [out] IInterface** object);
 
 
 
-### IMetaCoclass
+### IMetaEnumeration
+
+Enum枚举集合元数据操作
 
 ##### 常量(Consts)
+
+（无）
+
 ##### 方法总汇(Method Summary)
 ```idl
 GetComponent([out] IMetaComponent&& comp);
@@ -132,9 +149,14 @@ GetEnumerator([in] String name, [out] IMetaEnumerator&& enumr);
 
 
 
-
 ### IMetaEnumerator
+
+Enum枚举数据元数据操作
+
 ##### 常量(Consts)
+
+（无）
+
 ##### 方法总汇(Method Summary)
 ```idl
 GetEnumeration([out] IMetaEnumeration&& enumn);
@@ -147,14 +169,19 @@ GetValue([out] Integer& value);
   获取构件名称。
 
   **参数(Parameters):**
-  
+
     1. [
 
 
 
 ### IMetaInterface
 
+接口元数据操作
+
 ##### 常量(Consts)
+
+（无）
+
 ##### 方法总汇(Method Summary)
 ```idl
 GetComponent([out] IMetaComponent&& comp);
@@ -179,14 +206,19 @@ GetMethod([in] Integer index, [out] IMetaMethod&& method);
   获取。
 
   **参数(Parameters):**
-  
+
     1. [
 
 
 
 ### IMetaConstant
 
+常量元数据操作
+
 ##### 常量(Consts)
+
+（无）
+
 ##### 方法总汇(Method Summary)
 ```idl
 GetName([out] String& name);
@@ -200,14 +232,19 @@ GetValue([out] IMetaValue&& value);
   获取名称。
 
   **参数(Parameters):**
-  
+
     1. [
 
 
 
 ### IMetaMethod
 
+方法元数据操作
+
 ##### 常量(Consts)
+
+（无）
+
 ##### 方法总汇(Method Summary)
 ```idl
 GetInterface([out] IMetaInterface&& intf);
@@ -215,8 +252,8 @@ GetName([out] String& name);
 GetSignature([out] String& signature);
 GetParameterNumber([out] Integer& number);
 GetAllParameters([out] Array<IMetaParameter*>& params);
-GetParameter([in] String name,[out] IMetaParameter&& param);
-GetParameter([in] Integer index,[out] IMetaParameter&& param);
+GetParameter([in] String name, [out] IMetaParameter&& param);
+GetParameter([in] Integer index, [out] IMetaParameter&& param);
 HasOutArguments([out] Boolean& outArgs);
 CreateArgumentList([out] IArgumentList&& argList);
 Invoke([in] IInterface* thisObject,[in] IArgumentList* argList);
@@ -227,14 +264,19 @@ Invoke([in] IInterface* thisObject,[in] IArgumentList* argList);
   获取。
 
   **参数(Parameters):**
-  
+
     1. [
 
 
 
 ### IMetaConstructor : IMetaMethod
 
+构造器元数据操作
+
 ##### 常量(Consts)
+
+（无）
+
 ##### 方法总汇(Method Summary)
 ```idl
 GetCoclass([out] IMetaCoclass&& klass);
@@ -247,14 +289,19 @@ CreateObject([in] IArgumentList* argList, [out] IInterface&& object);
   获取名称。
 
   **参数(Parameters):**
-  
+
     1. [
 
 
 
 ### IMetaParameter
 
+参数元数据操作
+
 ##### 常量(Consts)
+
+（无）
+
 ##### 方法总汇(Method Summary)
 ```idl
 GetMethod([out] IMetaMethod&& method);
@@ -269,14 +316,30 @@ GetType([out] IMetaType&& type);
   获取构件名称。
 
   **参数(Parameters):**
-  
+
     1. [
 
 
 
 ### IMetaType
 
+数据类型元数据操作
+
 ##### 常量(Consts)
+
+```c++
+namespace como {
+enum class TypeKind
+{
+    Unknown,     Char = 1,    Byte,    Short,    Integer,    Long,    Float,    Double,
+    Boolean,    String,    CoclassID,    ComponentID,    InterfaceID,    HANDLE,    ECode,
+    Enum,    Array,    Interface,    Coclass,    Triple,    TypeKind,
+};
+} // namespace como
+```
+
+
+
 ##### 方法总汇(Method Summary)
 ```idl
 GetName([out] String& name);
@@ -290,15 +353,19 @@ GetTypeModification([out] TypeModification& typeMod);
   获取名称。
 
   **参数(Parameters):**
-  
+
     1. [
-  
-       
+
 
 
 ### IMetaValue
 
+取出参数值
+
 ##### 常量(Consts)
+
+（无）
+
 ##### 方法总汇(Method Summary)
 ```idl
 GetType([out] IMetaType&& type);
@@ -319,49 +386,54 @@ GetRadix([out] Integer& radix);
   获取。
 
   **参数(Parameters):**
-  
+
     1. [out] IMetaType&& type
 
 
 
 ### IArgumentList
 
+参数变量列表操作
+
 ##### 常量(Consts)
+
+（无）
+
 ##### 方法总汇(Method Summary)
 ```idl
-GetInputArgumentOfByte([in] Integer index,[out] Byte& value);
+GetInputArgumentOfByte([in] Integer index, [out] Byte& value);
 SetInputArgumentOfByte([in] Integer index,[in] Byte value);
-GetInputArgumentOfShort([in] Integer index,[out] Short& value);
+GetInputArgumentOfShort([in] Integer index, [out] Short& value);
 SetInputArgumentOfShort([in] Integer index,[in] Short value);
-GetInputArgumentOfInteger([in] Integer index,[out] Integer& value);
+GetInputArgumentOfInteger([in] Integer index, [out] Integer& value);
 SetInputArgumentOfInteger([in] Integer index,[in] Integer value);
-GetInputArgumentOfLong([in] Integer index,[out] Long& value);
+GetInputArgumentOfLong([in] Integer index, [out] Long& value);
 SetInputArgumentOfLong([in] Integer index,[in] Long value);
-GetInputArgumentOfFloat([in] Integer index,[out] Float& value);
+GetInputArgumentOfFloat([in] Integer index, [out] Float& value);
 SetInputArgumentOfFloat([in] Integer index,[in] Float value);
-GetInputArgumentOfDouble([in] Integer index,[out] Double& value);
+GetInputArgumentOfDouble([in] Integer index, [out] Double& value);
 SetInputArgumentOfDouble([in] Integer index,[in] Double value);
-GetInputArgumentOfChar([in] Integer index,[out] Char& value);
+GetInputArgumentOfChar([in] Integer index, [out] Char& value);
 SetInputArgumentOfChar([in] Integer index,[in] Char value);
-GetInputArgumentOfBoolean([in] Integer index,[out] Boolean& value);
+GetInputArgumentOfBoolean([in] Integer index, [out] Boolean& value);
 SetInputArgumentOfBoolean([in] Integer index,[in] Boolean value);
-GetInputArgumentOfString([in] Integer index,[out] String& value);
+GetInputArgumentOfString([in] Integer index, [out] String& value);
 SetInputArgumentOfString([in] Integer index,[in] String value);
-GetInputArgumentOfHANDLE([in] Integer index,[out] HANDLE& value);
+GetInputArgumentOfHANDLE([in] Integer index, [out] HANDLE& value);
 SetInputArgumentOfHANDLE([in] Integer index,[in] HANDLE value);
-GetInputArgumentOfECode([in] Integer index,[out] ECode& value);
+GetInputArgumentOfECode([in] Integer index, [out] ECode& value);
 SetInputArgumentOfECode([in] Integer index,[in] ECode value);
-GetInputArgumentOfCoclassID([in] Integer index,[out] CoclassID& value);
+GetInputArgumentOfCoclassID([in] Integer index, [out] CoclassID& value);
 SetInputArgumentOfCoclassID([in] Integer index,[in] CoclassID value);
-GetInputArgumentOfComponentID([in] Integer index,[out] ComponentID& value);
+GetInputArgumentOfComponentID([in] Integer index, [out] ComponentID& value);
 SetInputArgumentOfComponentID([in] Integer index,[in] ComponentID value);
-GetInputArgumentOfInterfaceID([in] Integer index,[out] InterfaceID& value);
+GetInputArgumentOfInterfaceID([in] Integer index, [out] InterfaceID& value);
 SetInputArgumentOfInterfaceID([in] Integer index,[in] InterfaceID value);
-GetInputArgumentOfArray([in] Integer index,[out] Triple& value);
+GetInputArgumentOfArray([in] Integer index, [out] Triple& value);
 SetInputArgumentOfArray([in] Integer index,[in] Triple value);
-GetInputArgumentOfEnumeration([in] Integer index,[out] Integer& value);
+GetInputArgumentOfEnumeration([in] Integer index, [out] Integer& value);
 SetInputArgumentOfEnumeration([in] Integer index,[in] Integer value);
-GetInputArgumentOfInterface([in] Integer index,[out] IInterface&& value);
+GetInputArgumentOfInterface([in] Integer index, [out] IInterface&& value);
 SetInputArgumentOfInterface([in] Integer index,[in] IInterface* value);
 AssignOutputArgumentOfByte([in] Integer index,[in] Byte value);
 SetOutputArgumentOfByte([in] Integer index,[in] HANDLE addr);
@@ -397,11 +469,11 @@ AssignOutputArgumentOfEnumeration([in] Integer index,[in] Integer value);
 SetOutputArgumentOfEnumeration([in] Integer index,[in] HANDLE addr);
 AssignOutputArgumentOfInterface([in] Integer index,[in] IInterface* value);
 SetOutputArgumentOfInterface([in] Integer index,[in] HANDLE addr);
-GetArgumentAddress([in] Integer index,[out] HANDLE& addr);
+GetArgumentAddress([in] Integer index, [out] HANDLE& addr);
 ```
 ##### 方法详解(Method Detail)
 
-- GetInputArgumentOfByte([in] Integer index,[out] Byte& value);
+- GetInputArgumentOfByte([in] Integer index, [out] Byte& value);
   获取。
 
   **参数(Parameters):**
