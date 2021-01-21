@@ -8,6 +8,28 @@ COMO以构件模块为封装和存储单位，并通过动态链接库实现(每
 
 
 
+COMO中的Class的Load机制和Java虚拟机JVM ClassLoad类似，也有CLASSPATH（环境变量：PATH），所有PATH中的构件将被索引，从而可以通过名字找到它。通过ClassLoader装载元数据，需要得到一个对象实例（instance）时，找到类厂（class factory），再由类厂去创建ClassObject对象，通过`IClassObject`接口操作ClassObject对象。`como::IClassObject->CreateObject()`
+```c++
+ECode CoGetComponentMetadata(
+    /* [in] */ const ComponentID& cid,		//也可以是：const String& path, 
+    /* [in] */ IClassLoader* loader,
+    /* [out] */ AutoPtr<IMetaComponent>& mc)
+{
+    if (loader == nullptr) {
+        loader = CBootClassLoader::GetSystemClassLoader();
+    }
+
+    return loader->LoadComponent(cid, mc);
+
+}
+
+AutoPtr<IMetaComponent> mc;
+CoGetComponentMetadata(CID_FooBarDemo, nullptr, mc);
+CoGetComponentMetadata("FooBarDemo.so", nullptr, mc);
+```
+
+
+
 ### 名词解释：
 
 - Component， 构件，Component比class更大一级
