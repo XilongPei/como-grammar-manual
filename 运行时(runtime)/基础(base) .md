@@ -35,8 +35,7 @@ CoGetComponentMetadata("FooBarDemo.so", nullptr, mc);
 - Component， 构件，Component比class更大一级
 - Coclass， 类
 - class factory，类厂
-
-- 接口是一组逻辑上相关的函数集合，是构件特征的抽象定义，是最基本的构件使用单位。
+- Interface（接口），接口是一组逻辑上相关的函数集合，是构件特征的抽象定义，是最基本的构件使用单位。接口概念类似于C++的抽象类（abstract class）、Java中的接口（interface），声明了“契约”。
 
 - 构件类是最基本的构件运行实体（指构件对象），一个构件模块可以封装一到多个构件类的实现。构件类的实例是构件对象， 构件对象是接口的实现，一个构件对象可以实现多个接口，一个接口可以被多个构件对象实现。
 
