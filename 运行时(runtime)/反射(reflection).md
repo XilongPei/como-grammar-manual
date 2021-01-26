@@ -9,21 +9,24 @@
 
 
 
-## como反射机制API一共由下列接口组成：
+## COMO反射机制API一共由下列接口组成：
 
-interface como::IArgumentList;
-interface como::IClassLoader;
-interface como::IMetaCoclass;
-interface como::IMetaConstant;
-interface como::IMetaConstructor;
-interface como::IMetaEnumeration;
-interface como::IMetaEnumerator;
-interface como::IMetaInterface;
-interface como::IMetaMethod;
-interface como::IMetaParameter;
-interface como::IMetaType;
-interface como::IMetaValue;
-interface como::IMetaComponent
+| 接口interface           | 功能                   |
+| ----------------------- | ---------------------- |
+| como::IMetaComponent    | 构件元数据操作         |
+| como::IMetaCoclass;     | 类元数据操作           |
+| como::IMetaEnumeration; | Enum枚举集合元数据操作 |
+| como::IMetaEnumerator;  | Enum枚举数据元数据操作 |
+| como::IMetaInterface;   | 接口元数据操作         |
+| como::IMetaConstant;    | 常量元数据操作         |
+| como::IMetaMethod;      | 方法元数据操作         |
+| como::IMetaConstructor  | 构造器元数据操作       |
+| como::IMetaParameter;   | 参数元数据操作         |
+| como::IMetaType;        | 数据类型元数据操作     |
+| como::IMetaValue;       | 取出参数值             |
+| como::IArgumentList;    | 参数变量列表操作       |
+
+
 
 
 
