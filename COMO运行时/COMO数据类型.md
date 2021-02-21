@@ -43,3 +43,51 @@ struct InterfaceID
     static const InterfaceID Null;
 };
 ```
+
+
+
+## 方法签名
+
+方法签名是在元数据中，对方法除方法名（函数名）之外，参数及返回值数据类型的标识字符串。
+
+Method::BuildSignature
+
+(参数签名)返回值类型签名
+
+#### Type Signature
+
+|    Type     | Signature |
+| :---------: | :-------: |
+|    Byte     |     B     |
+|    Short    |     S     |
+|   Integer   |     I     |
+|    Long     |     L     |
+|    Float    |     F     |
+|   Double    |     D     |
+|    Char     |     C     |
+|   Boolean   |     Z     |
+|   String    |     T     |
+|   HANDLE    |     H     |
+|    ECode    |     E     |
+|  CoclassID  |     K     |
+| ComponentID |     M     |
+| InterfaceID |     U     |
+|   Triple    |     R     |
+|    Array    |     [     |
+|   Pointer   |     *     |
+|  Reference  |     &     |
+|    Enum     |  Lxx/xx;  |
+|  Interface  |  Lxx/xx;  |
+
+
+
+#### 局部数据类型Local Types
+局部数据类型是经过RPC时必须对其进行编码的数据类型，包括：
+- HANDLE,
+- CoclassID,
+- ComponentID,
+- InterfaceID
+- Array<*local types*>.
+
+#### 参考
+[Java Syntax Specification](https://users-cs.au.dk/amoeller/RegAut/JavaBNF.html)
