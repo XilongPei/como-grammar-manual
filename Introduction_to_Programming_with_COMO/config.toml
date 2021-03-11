@@ -1,4 +1,5 @@
-baseurl = "https://gitee.com/tjopenlab/como-grammar-manual/Introduction_to_Programming_with_COMO/public/"
+#baseurl = "https://gitee.com/tjopenlab/como-grammar-manual/Introduction_to_Programming_with_COMO/public/"
+baseurl = "file:///E:/UbuntuHome/como-grammar-manual/Introduction_to_Programming_with_COMO/public/"
 languageCode = "zh-CN"
 title = "COMO程序设计"
 theme = "book"
@@ -13,8 +14,7 @@ enableGitInfo = true
 [params]
     # Set source repository location.
     # Used for "Last Modified" and "Edit this page" links.
-    #BookRepo = "https://gitee.com/tjopenlab/como-grammar-manual/"
-    BookRepo = "./"
+    BookRepo = "https://gitee.com/tjopenlab/como-grammar-manual/"
 
     # Enable "Edit this page" links for "doc" page type.
     # Disabled by default. Uncomment to enable. Requires "BookRepo" param.
