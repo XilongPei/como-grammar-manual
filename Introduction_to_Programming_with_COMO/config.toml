@@ -1,5 +1,6 @@
 #baseurl = "https://gitee.com/tjopenlab/como-grammar-manual/Introduction_to_Programming_with_COMO/public/"
-baseurl = "file:///E:/UbuntuHome/como-grammar-manual/Introduction_to_Programming_with_COMO/public/"
+#baseurl = "file:///E:/UbuntuHome/como-grammar-manual/Introduction_to_Programming_with_COMO/public/"
+baseurl = "file:///home/xilong/como/como-grammar-manual/Introduction_to_Programming_with_COMO/public/"
 languageCode = "zh-CN"
 title = "COMO程序设计"
 theme = "book"
