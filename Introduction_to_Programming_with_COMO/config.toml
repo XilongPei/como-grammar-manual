@@ -1,6 +1,14 @@
 #baseurl = "https://gitee.com/tjopenlab/como-grammar-manual/Introduction_to_Programming_with_COMO/public/"
 #baseurl = "file:///E:/UbuntuHome/como-grammar-manual/Introduction_to_Programming_with_COMO/public/"
-baseurl = "file:///home/xilong/como/como-grammar-manual/Introduction_to_Programming_with_COMO/public/"
+baseurl = "/t_o_n_g_j_i/"
+
+#
+# 由于Hugo在处理非根URL（如：http://www.tongji.edu.cn/path/）时有bug，所以在通过下面的命令生成静态文件后，
+# hugo_extended_0.81.0_Linux-64bit/hugo -D
+# 需要把 public 目录下的所有文件中的 /t_o_n_g_j_i 替换为真正的URL, 如：
+# file:///E:/UbuntuHome/como-grammar-manual/Introduction_to_Programming_with_COMO/public
+#
+
 languageCode = "zh-CN"
 title = "COMO程序设计"
 theme = "book"
