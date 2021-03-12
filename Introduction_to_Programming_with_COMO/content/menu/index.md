@@ -2,13 +2,14 @@
 headless: true
 ---
 
-- [**Example Site**]({{< relref "/docs/example" >}})
-- [Table of Contents]({{< relref "/docs/example/table-of-contents" >}})
-  - [With ToC]({{< relref "/docs/example/table-of-contents/with-toc" >}})
-  - [Without ToC]({{< relref "/docs/example/table-of-contents/without-toc" >}})
-- [Collapsed]({{< relref "/docs/example/collapsed" >}})
-  - [3rd]({{< relref "/docs/example/collapsed/3rd-level" >}})
-    - [4th]({{< relref "/docs/example/collapsed/3rd-level/4th-level" >}})
+- [**COMO C++构件技术**]({{< relref "/docs/como" >}})
+- [COMO运行时]({{< relref "/docs/runtime" >}})
+  - [COMO数据类型]({{< relref "/docs/runtime/datatype" >}})
+  - [类加载机制]({{< relref "/docs/runtime/classloader" >}})
+- [基础类库libcore]({{< relref "/docs/libcore/collapsed" >}})
+  - [核心core]({{< relref "/docs/libcore/core" >}})
+    - [IArray]({{< relref "/docs/libcore/core/iarray" >}})
+    - [IByte]({{< relref "/docs/libcore/core/ibyte" >}})
 <br />
 
 - **Shortcodes**
