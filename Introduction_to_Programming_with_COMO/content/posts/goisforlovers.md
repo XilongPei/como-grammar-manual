@@ -275,7 +275,7 @@ date: "2013-11-18"
 aliases:
   - "/doc/permalinks/"
 groups: ["extras"]
-groups_weight: 30
+groups_# weight: 30
 notoc: true
 ---
 ```
