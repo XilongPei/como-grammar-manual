@@ -20,6 +20,17 @@ disablePathToLower = true
 #  information on "doc" type pages.
 enableGitInfo = true
 
+[menu]
+[[menu.after]]
+  name = "开源在Gitee"
+  url = "https://gitee.com/tjopenlab/como"
+  weight = 10
+
+#[[menu.before]]
+#  name = "同济大学计算机开放实验室"
+#  url = "https://www.tongji.edu.cn/"
+#  weight = 10
+
 [params]
     # Set source repository location.
     # Used for "Last Modified" and "Edit this page" links.
