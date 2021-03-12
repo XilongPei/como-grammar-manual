@@ -1,1 +1,3 @@
-_index.md
+---
+bookCollapseSection: true
+---
