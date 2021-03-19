@@ -494,3 +494,35 @@ GetArgumentAddress([in] Integer index, [out] HANDLE& addr);
   **参数(Parameters):**
     1. [in] Integer index
     2. [out] Byte& value
+
+
+
+### 关于方法签名：
+
+构造器签名字符串signature是一种COMO方法签名。
+| 数据类型  | 签名 | 数据类型 | 签名 |
+|:-----------:|:---------:|:-----------:|:---------:|
+| Byte        |     B     | CoclassID   |     K     |
+| Short       |     S     | ComponentID |     M     |
+| Integer     |     I     | InterfaceID |     U     |
+| Long        |     L     | Triple      |     R     |
+| Float       |     F     | Array       |     [     |
+| Double      |     D     | Pointer     |     *     |
+| Char        |     C     | Reference   |     &     |
+| Boolean     |     Z     | Enum        | Lxx/xx;   |
+| String      |     T     | Interface   | Lxx/xx;   |
+| HANDLE      |     H     | ECode       |     E     |
+
+**签名字符串组成规则为**：
+- 有返回值
+```idl
+ (参数签名)返回值签名
+```
+- 没有返回值
+```idl
+ (参数签名)E
+```
+ 示例：
+```idl
+ (ITL)I
+```
