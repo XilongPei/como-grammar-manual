@@ -48,6 +48,18 @@
 
 （无）
 
+##### 特别说明
+
+GetInterfaceNumber、GetAllInterfaces这两个函数，得到的是构件中定义的接口，而不是实现了的接口。定义的接口是一种原型定义，比如作为参数的接口可能不在本cdl文件中定义，但要声明它是一个接口类型，否则cdl编译器（cdlc）会无所适从。如COMO源码中的rpc.cdl中这样的语句：
+
+```idl
+interface IArgumentList;
+interface IDeathRecipient;
+interface IMetaMethod;
+interface IProxy;
+interface IStub;
+```
+
 ##### 方法总汇(Method Summary)
 ```idl
 GetName([out] String& name);
