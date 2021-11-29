@@ -67,8 +67,18 @@ xilongpei@xilongpei-OptiPlex-7010:~/como/como/out/target/como.linux.x64.rls$ ./t
 
 ## 程序调试知识
 
-C++源码中设置断点 https://github.com/scottt/debugbreak
+#### C++源码中设置断点 https://github.com/scottt/debugbreak
 
 ```
 __builtin_trap();
 ```
+
+#### 反汇编
+
+有些时候，你不得不读汇编代码。示例如下：
+
+```
+g++ -g cpp_test.cpp
+objdump -d -S -C a.out
+```
+
