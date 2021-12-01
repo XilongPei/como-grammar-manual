@@ -82,3 +82,26 @@ g++ -g cpp_test.cpp
 objdump -d -S -C a.out
 ```
 
+#### ldd命令
+
+Linux 下可以使用ldd查看可执行文件所需要的动态链接库（*.so）。
+
+```shell
+[xilong-tongji@tongji-openeuler como.linux.aarch64.rls]$ ldd ./como/runtime/comort.so
+        linux-vdso.so.1 (0x0000fffef3eb0000)
+        libdl.so.2 => /lib64/libdl.so.2 (0x0000fffef3de0000)
+        libpthread.so.0 => /lib64/libpthread.so.0 (0x0000fffef3da0000)
+        libdbus-1.so.3 => /lib64/libdbus-1.so.3 (0x0000fffef3d20000)
+        libstdc++.so.6 => /lib64/libstdc++.so.6 (0x0000fffef3b70000)
+        libm.so.6 => /lib64/libm.so.6 (0x0000fffef3aa0000)
+        libgcc_s.so.1 => /lib64/libgcc_s.so.1 (0x0000fffef3a60000)
+        libc.so.6 => /lib64/libc.so.6 (0x0000fffef38e0000)
+        /lib/ld-linux-aarch64.so.1 (0x0000fffef3ec0000)
+        libsystemd.so.0 => /lib64/libsystemd.so.0 (0x0000fffef3810000)
+        librt.so.1 => /lib64/librt.so.1 (0x0000fffef37e0000)
+        liblzma.so.5 => /lib64/liblzma.so.5 (0x0000fffef3790000)
+        liblz4.so.1 => /lib64/liblz4.so.1 (0x0000fffef3730000)
+        libgcrypt.so.20 => /lib64/libgcrypt.so.20 (0x0000fffef3650000)
+        libgpg-error.so.0 => /lib64/libgpg-error.so.0 (0x0000fffef3600000)
+```
+
