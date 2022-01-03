@@ -18,14 +18,32 @@ ZeroMQ 消息是在同一应用程序的应用程序或组件之间传递的一�
 
 ## 基于ZeroMQ的COMO RPC 
 
-AddService时，增加了一个参数，IP地址:端口，把本地的一个服务注册到其它机器的COMO运行时上，然后再它调用方式都不动，就象是本机RPC一样。
+如果是本地注册服务，调用的是AddService，如果是远地注册服务，调用的是AddRemoteService。
+
+AddRemoteService时，增加了一个参数，IP地址:端口，把本地的一个服务注册到其它机器的COMO运行时（COMORuntime）上，然后再它调用方式都不变，就象是本机RPC一样。
 
 ```cpp
 ECode ServiceManager::AddRemoteService(
-    /* [in] */ const String& serverName,
+    /* [in] */ const String& thisServerName,
+    /* [in] */ const String& thatServerName,
     /* [in] */ const String& name,
-    /* [in] */ IInterface* object)
+    /* [in] */ IInterface* object);
 ```
+
+ServiceManager::GetService取得服务时，有这样的代码：
+
+```cpp
+            String str = nullptr;
+            ec = ipack->GetServerName(str);
+            if ((nullptr == str) || str.IsEmpty()) {
+                ec = CoUnmarshalInterface(ipack, RPCType::Local, object);
+            }
+            else {
+                ec = CoUnmarshalInterface(ipack, RPCType::Remote, object);
+            }
+```
+
+根据服务提供者的ServerName是否设，不为空，则是远程服务，此时client得到的接口指向的是远程。
 
 
 
