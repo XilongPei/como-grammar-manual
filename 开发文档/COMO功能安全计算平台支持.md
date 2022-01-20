@@ -71,6 +71,24 @@ FuncSafetySetting = "timeout = 10000 ; delay = 0"
 
 # 分区申请内存
 
+```cpp
+ComoContext.h
+    // --- Memory Area
+    Integer iCurrentMemArea;
+    COMO_CALLOC funComoCalloc;
+
+    #define BEGIN_USE_MY_MEM_AREA                                   \
+    {                                                               \
+        Mutex::AutoLock lock(gContextLock);                         \
+        Integer iCurrentMemArea = gComoContext->iCurrentMemArea;    \
+        COMO_CALLOC funComoCalloc = gComoContext->funComoCalloc;    \
+
+    #define END_USE_MY_MEM_AREA                                     \
+        gComoContext->iCurrentMemArea = iCurrentMemArea;            \
+        gComoContext->funComoCalloc = funComoCalloc;                \
+    }
+```
+
 如果有ComoContext::gComoContext->funComoCalloc设置，则由该函数负责分配COMO对象内存。
 
 ```cpp
