@@ -27,3 +27,29 @@
 源码树中的角本add_tests_to_gtest-runner.sh是把测试案例放入gtest-runner的工具：
 
 /como/test/scripts/add_tests_to_gtest-runner.sh
+
+
+
+## COMO构件元数据dump工具
+
+```shell
+$ cdlc -comoMetadataReader -metadata-so sampleComoComponent.so -dump-metadata
+```
+
+- sampleComoComponent.so 为构件库（动态链接库）名字。
+
+
+
+## comouuid工具
+
+```shell
+(base) xilong@XilongPei:~/home/como/tools$ ./comouuid --help
+Ggenerate a uuid or a hash uuid-style string of a URI (example: a::b::c).
+Usage: comouuid [options]
+Options:
+--help                  Display command line options
+--cpp                   Display UUID for C++ program
+-genuuid                Generate a random hash uuid-style string
+-cityhash URL           Generate a hash uuid-style string of a URI (example: a::b::c)
+```
+

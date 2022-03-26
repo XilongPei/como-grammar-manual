@@ -103,7 +103,7 @@ ECode CByteClassObject::CreateObject(
 #ifdef COMO_FUNCTION_SAFETY
     if (ComoContext::gComoContext != nullptr) {
         if (ComoContext::gComoContext->funComoCalloc != nullptr) {
-            addr = ComoContext::gComoContext->funComoCalloc(sizeof(CByte), 1);
+            addr = ComoContext::gComoContext->funComoMalloc(ComoContext::gComoContext->iCurrentMemArea, sizeof(CByte), 1);
         }
         else {
             addr = calloc(sizeof(CByte), 1);
@@ -309,3 +309,9 @@ void getPropertyName(const char *s)
 - ##### 因为`FSOGetter`是个宏，不是真正的函数名，所以调用这个函数时，需要 `CallFSOGetter(fieldName,args...)` 这样的写法。
 
 - ##### C++宏构造起来的程序逻辑，`_get_##n这种方式构造出的函数名，无法有类名，所现在版本的Setter/Getter函数是C的，如果需要调用类的方法，需要传类对象指针的方式实现对C++程序资源的调用。
+
+
+
+## 具有校验能力的智能指针
+
+AutoPtr中的mPtr，在Linux 64位系统（x64、aarch64）上，高2个字节总是0，利用这2个字节，VerifiedU64Pointer算法。实现对指针的1 bit出错修复，多bit出错检测的功能。
