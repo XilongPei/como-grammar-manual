@@ -69,69 +69,102 @@ FuncSafetySetting = "timeout = 10000 ; delay = 0"
 
 
 
-# 分区申请内存
+# 分区内存申请与创建COMO对象
+
+下面程序示例的两种方法将使COMO对象New在分区内存中，前提是ComoContext::gComoContext要设置与分区内存相关的信息。
+
+- InterfaceIDfromNameWithMemArea("como::demo::IBar", 分区内存序号（0开始，最大值4096）);
+
+- InterfaceIDWithMemArea(IID_IBar, 分区内存序号（0开始，最大值4096）);
+
+  在分区内存中New对象时，InterfaceID携带了第几个内存分区信息。
 
 ```cpp
-ComoContext.h
-    // --- Memory Area
-    Integer iCurrentMemArea;
-    COMO_CALLOC funComoCalloc;
+TEST(TestIDfromName, testNewInMemArea)
+{
+    InterfaceID iid = InterfaceIDfromNameWithMemArea("como::demo::IBar", 1);
+    AutoPtr<IBar> bar;
+    ECode ec = CFooBar::New(iid, (IInterface**)&bar);
+    EXPECT_EQ(ec, NOERROR);
+    bar->Bar(String("testNewInMemArea: Tongji University"));
+}
 
-    #define BEGIN_USE_MY_MEM_AREA                                   \
-    {                                                               \
-        Mutex::AutoLock lock(gContextLock);                         \
-        Integer iCurrentMemArea = gComoContext->iCurrentMemArea;    \
-        COMO_CALLOC funComoCalloc = gComoContext->funComoCalloc;    \
-
-    #define END_USE_MY_MEM_AREA                                     \
-        gComoContext->iCurrentMemArea = iCurrentMemArea;            \
-        gComoContext->funComoCalloc = funComoCalloc;                \
-    }
+TEST(TestIDfromName, testNewInMemAreaWithIID)
+{
+    InterfaceID iid = InterfaceIDWithMemArea(IID_IBar, 1);
+    AutoPtr<IBar> bar;
+    ECode ec = CFooBar::New(iid, (IInterface**)&bar);
+    EXPECT_EQ(ec, NOERROR);
+    bar->Bar(String("testNewInMemAreaWithIID: Tongji University"));
+}
 ```
 
-如果有ComoContext::gComoContext->funComoCalloc设置，则由该函数负责分配COMO对象内存。
+如果有ComoContext::gComoContext->funComoMalloc设置，则由该函数负责分配COMO对象内存。
 
 ```cpp
-ECode CByteClassObject::CreateObject(
-    /* [in] */ Byte value,
+ECode CFooBarClassObject::CreateObject(
     /* [in] */ const InterfaceID& iid,
     /* [out] */ como::IInterface** object)
 {
     VALIDATE_NOT_NULL(object);
 
     void* addr;
-#ifdef COMO_FUNCTION_SAFETY
-    if (ComoContext::gComoContext != nullptr) {
-        if (ComoContext::gComoContext->funComoCalloc != nullptr) {
-            addr = ComoContext::gComoContext->funComoMalloc(ComoContext::gComoContext->iCurrentMemArea, sizeof(CByte), 1);
+//#ifdef COMO_FUNCTION_SAFETY
+    if ((iid.mCid != nullptr) && ((HANDLE)iid.mCid < 4096) && (ComoContext::gComoContext != nullptr)) {
+        if (ComoContext::gComoContext->funComoMalloc != nullptr) {
+            addr = ComoContext::gComoContext->funComoMalloc((Short)(HANDLE)iid.mCid - 1, sizeof(CFooBar));
         }
         else {
-            addr = calloc(sizeof(CByte), 1);
+            addr = calloc(sizeof(CFooBar), 1);
         }
     }
     else {
-        addr = calloc(sizeof(CByte), 1);
+        addr = calloc(sizeof(CFooBar), 1);
     }
-#else
-    addr = calloc(sizeof(CByte), 1);
+/*#else
+    addr = calloc(sizeof(CFooBar), 1);
 #endif
-    if (addr == nullptr) {
+*/    if (addr == nullptr) {
         return E_OUT_OF_MEMORY_ERROR;
     }
-    CByte* _obj = new(addr) CByte();
-    ECode ec = _obj->Constructor(value);
+    CFooBar* _obj = new(addr) CFooBar();
+    ECode ec = _obj->Constructor();
     if (FAILED(ec)) {
-        free(addr);
+        delete _obj;
         return ec;
     }
-    _obj->AttachMetadata(mComponent, "como::core::CByte");
+    _obj->AttachMetadata(mComponent, "como::demo::CFooBar");
     *object = _obj->Probe(iid);
+    if (*object) {
+        _obj->SetObjSize(sizeof(CFooBar));
+#ifdef COMO_FUNCTION_SAFETY
+        if ((iid.mCid != nullptr) && ((HANDLE)iid.mCid < 4096) && (ComoContext::gComoContext != nullptr)) {
+            if (ComoContext::gComoContext->freeMemInArea != nullptr) {
+                _obj->SetFunFreeMem(ComoContext::gComoContext->freeMemInArea, (Short)(HANDLE)iid.mCid - 1);
+            }
+        }
+#endif
+    }
+#ifdef COMO_FUNCTION_SAFETY
+    else {
+        if ((iid.mCid != nullptr) && ((HANDLE)iid.mCid < 4096) && (ComoContext::gComoContext != nullptr)) {
+            if (ComoContext::gComoContext->freeMemInArea != nullptr) {
+                ComoContext::gComoContext->freeMemInArea((Short)(HANDLE)iid.mCid - 1, addr);
+                return E_INTERFACE_NOT_FOUND_EXCEPTION;
+            }
+        }
+        delete _obj;
+        return E_INTERFACE_NOT_FOUND_EXCEPTION;
+    }
+#else
+    else {
+        delete _obj;
+        return E_INTERFACE_NOT_FOUND_EXCEPTION; 
+    }
+#endif
     REFCOUNT_ADD(*object);
-    Object* obj = static_cast<Object*>(_obj);
-    if (obj) { obj->setObjSize(sizeof(CByte)); }
     return NOERROR;
 }
-
 ```
 
 
