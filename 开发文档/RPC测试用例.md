@@ -105,3 +105,37 @@ Linux 下可以使用ldd查看可执行文件所需要的动态链接库（*.so�
         libgpg-error.so.0 => /lib64/libgpg-error.so.0 (0x0000fffef3600000)
 ```
 
+
+
+# COMO RPC Over ZeroMQ测试用例
+
+### 编译环境
+
+```
+export RPC_OVER_ZeroMQ_SUPPORT_Enable=enable
+```
+
+
+
+### 1、起动服务管理器
+
+```
+./servicemanager/exe/linux/servicemanager
+```
+
+### 2、起动基于ZeroMQ的服务
+
+```
+./test/runtime/rpc/serviceZMQ/testRPCZmqSrv
+```
+
+
+
+### 3、启动基于ZeroMQ的客户端
+
+```
+./test/runtime/rpc/clientZMQ/testRPCZmqCli
+```
+
+
+
